@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<ISAdminApp.Models.Order>
+
+<div class="row">
+    <a class="btn btn-outline-success"asp-controller="Order" asp-action="ExportAllOrders">Export Orders</a>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-md-1">
+                Name
+            </th>
+            <th class="col">
+                Movie Name
+            </th>
+            <th class="col">
+                Price
+            </th>
+            <th class="col">
+                Genre
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            for (int i = 0; i < Model.Count; i++)
+            {
+                var order = Model[i];
+                <tr>
+                    <td>
+                        @order.OrderedBy.Name
+                    </td>
+                    <td>
+                        
+                        @foreach (var TicketInOrder in order.Tickets)
+                        {
+                            @TicketInOrder.Ticket.MovieTitle
+                        }
+                    </td>
+                    <td>
+                    
+                        @foreach (var TicketInOrder in order.Tickets)
+                        {
+                            @TicketInOrder.Ticket.Price
+                        }
+                    </td>
+                    <td>
+                        
+                        @foreach (var TicketInOrder in order.Tickets)
+                        {
+                            @TicketInOrder.Ticket.Genre
+                        }
+                    </td>
+                    <td>
+                        <a  asp-route-orderId="@order.Id" asp-action="Details" class=" btn btn-info">View Order</a>
+                        <a class=" btn btn-info" href="/Order/SavePdf/@order.Id ">Create Invoice</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

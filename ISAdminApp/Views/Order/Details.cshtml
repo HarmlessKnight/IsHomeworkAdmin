@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ISAdminApp.Models.Order
+
+<div class="justify-content-center text-center" style="font-size: 24px; font-weight: bold;">Order List</div>
+
+<div class="container">
+    <div class="m-3">
+        <a class="btn btn-success btn-lg d-block mx-auto mb-3" asp-action="Create">Order For: @Model.OrderedBy.Name</a>
+    </div>
+
+    <div class="row justify-content-center">
+        @for (int i = 0;i<Model.Tickets.Count;i++)
+        {
+            <div class="card mx-3" style="width: 18rem; margin-bottom: 20px;">
+                <img class="card-img-top" src="@Model.Tickets[i].Ticket.MovieImage" style="height:80%;max-width:90%" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Tickets[i].Ticket.MovieTitle</h5>
+                    <p class="card-text">@Model.Tickets[i].Ticket.Price</p>
+    
+                </div>
+            </div>
+
+            @if (i % 3 == 0)
+            {
+                @:</div><div class="row justify-content-center">
+            }
+
+           
+        }
+    </div>
+</div>
